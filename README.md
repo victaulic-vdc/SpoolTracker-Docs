@@ -4,7 +4,7 @@ User guides for Victaulic software products.
 
 ---
 
-## [Victaulic SpoolTracker](spooltracker/README.md)
+## <img src="images/spooltracker-logo-light.svg" class="guide-logo guide-logo--light" alt="" height="56"><img src="images/spooltracker-logo-dark.svg" class="guide-logo guide-logo--dark" alt="" height="56"> [Victaulic SpoolTracker](spooltracker/README.md)
 
 Mobile + web platform for digitally tracking spool installation through fabrication, shipping, and field installation.
 
@@ -14,7 +14,7 @@ Mobile + web platform for digitally tracking spool installation through fabricat
 
 → [Open the SpoolTracker docs](spooltracker/README.md)
 
-## [Victaulic Tools for Revit® (VTFR)](vtfr/README.md)
+## <img src="images/vtfr-logo-light.png" class="guide-logo guide-logo--light" alt="" height="56"><img src="images/vtfr-logo-dark.png" class="guide-logo guide-logo--dark" alt="" height="56"> [Victaulic Tools for Revit® (VTFR)](vtfr/README.md)
 
 Productivity add-in for Revit® MEP — pipe routing, spooling, procurement, hangers, and project administration.
 
