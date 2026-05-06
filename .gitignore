@@ -1,3 +1,4 @@
 *.py
 *.docx
 .claude/
+.obsidian/

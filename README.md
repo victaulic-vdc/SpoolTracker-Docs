@@ -1,29 +1,26 @@
-# Victaulic SpoolTracker Documentation
+# Victaulic Documentation
 
-SpoolTracker is a smartphone solution that enables Installation Engineers to digitally trace and track spool installation status using QR codes, replacing manual tracking processes. It includes mobile apps for Android and iOS, a web dashboard for project administration, and integration with Victaulic Tools for Revit (VTFR).
+User guides for Victaulic software products.
 
 ---
 
-## Mobile App
+## [Victaulic SpoolTracker](spooltracker/README.md)
 
-Guides for the SpoolTracker mobile application on Android and iOS.
+Mobile + web platform for digitally tracking spool installation through fabrication, shipping, and field installation.
 
-- [Getting Started](mobile-app/getting-started.md) — Introduction, user roles, features, assumptions, and offline usage
-- [Login & Dashboard](mobile-app/login-and-dashboard.md) — Login flow, code suggestions, scan history, filtering, settings, and logout
-- [Scan Details](mobile-app/scan-details.md) — Viewing single and multiple scan records, adding manual scans
-- [New Scan](mobile-app/new-scan.md) — Permissions, QR scanning, scan form, timer, photos, and confirm/cancel
+- Mobile app (Android / iOS) — QR code scanning, scan history, offline mode
+- Web dashboard at [spooltracker.victaulic.com](https://spooltracker.victaulic.com/)
+- VTFR integration for project setup and label export
 
-## Web Dashboard
+→ [Open the SpoolTracker docs](spooltracker/README.md)
 
-Guides for the SpoolTracker web dashboard at [spooltracker.victaulic.com](https://spooltracker.victaulic.com/).
+## [Victaulic Tools for Revit® (VTFR)](vtfr/README.md)
 
-- [Getting Started](dashboard/getting-started.md) — Account creation, first login, project access, and overview
-- [Project Settings](dashboard/project-settings.md) — Configuring scan types (non-timed, timed, repeat) and display ordering
+Productivity add-in for Revit® MEP — pipe routing, spooling, procurement, hangers, and project administration.
 
-## VTFR Integration
+- Pipe / Duct / Conduit tools — tagging, splitting, rotation, leveler, riser
+- Tagging, spooling, and assembly management — Custom Tagging, Auto Assembly, Package Tools, Victaulic Dock
+- Procurement Tool, Fabrication Hangers, Project Maintenance
+- SpoolTracker integration, ACC® connection, Cloud Settings
 
-Setting up SpoolTracker within Victaulic Tools for Revit.
-
-- [SpoolTracker Setup](vtfr-integration/spooltracker-setup.md) — Creating projects in VTFR and uploading spools
-- [Label Export](vtfr-integration/label-export.md) — Exporting CSV for label printing with Avery templates
-- [ACC Connection](vtfr-integration/acc-connection.md) — Autodesk Platform Services app creation, ACC custom integration, and dashboard linking
+→ [Open the VTFR docs](vtfr/README.md)
