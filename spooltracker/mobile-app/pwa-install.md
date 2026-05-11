@@ -39,6 +39,7 @@ The icons below appear in your browser during installation. Knowing what they lo
 > Supported on iOS 11.3+ and iPadOS. Installation must be done from **Safari** — Chrome and Firefox on iOS cannot install PWAs.
 
 1. In Safari, navigate to https://spooltracker.victaulic.com/app
+
     <img src="./images/pwainstall/ios/navigate_to_url.jpeg" width="200" alt="Screenshot with url">
 
 2. Tap the **Share** button ⬆️ at the bottom of the screen. Depending on your settings, it could be found at the top of your screen.
