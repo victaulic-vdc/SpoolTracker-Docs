@@ -28,3 +28,11 @@ Setting up SpoolTracker within Victaulic Tools for Revit.
 - [SpoolTracker Setup](vtfr-integration/spooltracker-setup.md) — Creating projects in VTFR and uploading spools
 - [Label Export](vtfr-integration/label-export.md) — Exporting CSV for label printing with Avery templates
 - [ACC Connection](vtfr-integration/acc-connection.md) — Autodesk Platform Services app creation, ACC custom integration, and dashboard linking
+
+## Developer API
+
+Read-only programmatic access to your organization's data via API keys.
+
+- [Overview](developer-api/README.md) — What the Developer API is, how to get a key, and what data is exposed
+- [Authentication](developer-api/authentication.md) — OAuth client_credentials flow with curl, Python, and Node.js examples
+- [Examples](developer-api/examples.md) — REST and GraphQL queries against projects, spools, scans, and bill of materials
