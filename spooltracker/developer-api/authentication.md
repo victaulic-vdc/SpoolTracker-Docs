@@ -9,14 +9,12 @@ Tokens are JWTs valid for **1 hour**. Cache and reuse them — do not request a 
 
 ## Endpoints
 
-| Purpose | URL (production) |
+| Purpose | URL |
 |---|---|
 | Token endpoint | `https://spooltracker.victaulic.com/connect/token` |
 | API base URL | `https://spooltracker-api.victaulic.com` |
 
 > **The token endpoint is on the dashboard host, not the API host.** This is intentional — the dashboard runs the OAuth server; the API host just validates the tokens it issues.
-
-For UAT, substitute `spooltracker-uat.victaulic.com` and `spooltracker-api-uat.victaulic.com`.
 
 ## Step 1 — Get a token
 

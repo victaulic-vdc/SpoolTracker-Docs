@@ -14,15 +14,15 @@ Typical use cases:
 
 - [Authentication](authentication.md) — how to mint a token from your API key
 - [Examples](examples.md) — concrete REST and GraphQL queries
+- [Postman collection](postman/) — import to start querying in 60 seconds
 
 ## Base URL
 
 | Environment | Host |
 |---|---|
 | Production | `https://spooltracker-api.victaulic.com` |
-| UAT | `https://spooltracker-api-uat.victaulic.com` |
 
-The token endpoint lives on the main dashboard host (`https://spooltracker.victaulic.com/connect/token` for production), not the API host. See [Authentication](authentication.md).
+The token endpoint lives on the main dashboard host (`https://spooltracker.victaulic.com/connect/token`), not the API host. See [Authentication](authentication.md).
 
 ## Two query styles
 
