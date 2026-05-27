@@ -2,7 +2,7 @@
 
 This page walks through realistic queries using both the REST and GraphQL surfaces. All examples assume you have a valid access token — see [Authentication](authentication.md) if you do not.
 
-For brevity, `$TOKEN` below stands for the access token from your token-exchange step. The base URL `$API` is `https://spooltracker-api.victaulic.com` in production (or the UAT host).
+For brevity, `$TOKEN` below stands for the access token from your token-exchange step. The base URL `$API` is `https://spooltracker-api.victaulic.com`.
 
 ## Entities at a glance
 

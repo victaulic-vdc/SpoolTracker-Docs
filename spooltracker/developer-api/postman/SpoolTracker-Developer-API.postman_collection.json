@@ -1,0 +1,236 @@
+{
+  "info": {
+    "name": "SpoolTracker Developer API",
+    "description": "Read-only API for SpoolTracker piping data. Uses OAuth 2.0 client credentials.\n\n**Setup**\n1. Import `SpoolTracker-Production.postman_environment.json`.\n2. In that environment, set `clientId` and `clientSecret` to the values you received when creating your API key.\n3. Select the environment in the top-right environment dropdown.\n4. Send any request — the collection-level pre-request script will fetch and cache an access token automatically.\n\nSee the full docs at https://github.com/victaulic-vdc/SpoolTracker-Docs/tree/master/spooltracker/developer-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Auto-refresh the access token if missing or within 60s of expiry.",
+          "// Skip for the 'Get Token (manual)' request so it can run standalone.",
+          "if (pm.info.requestName === 'Get Token (manual)') { return; }",
+          "",
+          "const tokenUrl = pm.environment.get('tokenUrl');",
+          "const clientId = pm.environment.get('clientId');",
+          "const clientSecret = pm.environment.get('clientSecret');",
+          "const expiresAt = Number(pm.environment.get('tokenExpiresAt') || 0);",
+          "",
+          "if (!tokenUrl || !clientId || !clientSecret) {",
+          "    console.error('Environment is missing tokenUrl, clientId, or clientSecret. Select the SpoolTracker environment and fill in your credentials.');",
+          "    return;",
+          "}",
+          "",
+          "if (pm.environment.get('accessToken') && Date.now() < expiresAt - 60_000) {",
+          "    return;",
+          "}",
+          "",
+          "pm.sendRequest({",
+          "    url: tokenUrl,",
+          "    method: 'POST',",
+          "    header: { 'Content-Type': 'application/x-www-form-urlencoded' },",
+          "    body: {",
+          "        mode: 'urlencoded',",
+          "        urlencoded: [",
+          "            { key: 'grant_type', value: 'client_credentials' },",
+          "            { key: 'client_id', value: clientId },",
+          "            { key: 'client_secret', value: clientSecret },",
+          "            { key: 'scope', value: 'api' }",
+          "        ]",
+          "    }",
+          "}, (err, res) => {",
+          "    if (err) { console.error('Token request failed:', err); return; }",
+          "    if (res.code !== 200) { console.error('Token endpoint returned', res.code, res.text()); return; }",
+          "    const body = res.json();",
+          "    pm.environment.set('accessToken', body.access_token);",
+          "    pm.environment.set('tokenExpiresAt', Date.now() + (body.expires_in * 1000));",
+          "    console.log('Refreshed access token, expires in', body.expires_in, 'seconds');",
+          "});"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Get Token (manual)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "grant_type", "value": "client_credentials" },
+                { "key": "client_id", "value": "{{clientId}}" },
+                { "key": "client_secret", "value": "{{clientSecret}}" },
+                { "key": "scope", "value": "api" }
+              ]
+            },
+            "url": {
+              "raw": "{{tokenUrl}}",
+              "host": ["{{tokenUrl}}"]
+            },
+            "description": "Manually exchange the client credentials for an access token. You normally do not need to run this — the collection-level pre-request script does it automatically. Useful for debugging an `invalid_client` error."
+          }
+        },
+        {
+          "name": "Fetch OpenAPI spec",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/openapi",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "openapi"]
+            },
+            "description": "Returns the auto-generated OpenAPI 3.0 spec for every REST entity exposed by DAB. Import this URL in Postman (File → Import → Link) to regenerate a folder of stubs for every entity."
+          }
+        }
+      ]
+    },
+    {
+      "name": "REST",
+      "item": [
+        {
+          "name": "List projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Project?$first=25",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Project"],
+              "query": [
+                { "key": "$first", "value": "25" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List projects — select + orderby",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Project?$select=id,name,createdAt&$orderby=createdAt desc&$first=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Project"],
+              "query": [
+                { "key": "$select", "value": "id,name,createdAt" },
+                { "key": "$orderby", "value": "createdAt desc" },
+                { "key": "$first", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List spools — filter by project",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Spool?$filter=projectId eq REPLACE_WITH_PROJECT_ID&$first=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Spool"],
+              "query": [
+                { "key": "$filter", "value": "projectId eq REPLACE_WITH_PROJECT_ID" },
+                { "key": "$first", "value": "50" }
+              ]
+            },
+            "description": "OData-style filter. Replace REPLACE_WITH_PROJECT_ID with an actual id from the List projects response."
+          }
+        },
+        {
+          "name": "List scans — recent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Scan?$orderby=CreatedAt desc&$first=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Scan"],
+              "query": [
+                { "key": "$orderby", "value": "CreatedAt desc" },
+                { "key": "$first", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Organization — current",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/Organization",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "Organization"]
+            },
+            "description": "Returns the organization(s) your API key has access to. With RLS this is typically a single row."
+          }
+        }
+      ]
+    },
+    {
+      "name": "GraphQL",
+      "item": [
+        {
+          "name": "Projects with spool counts",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query ProjectsWithSpoolCounts($first: Int!) {\n  projects(first: $first, orderBy: { createdAt: DESC }) {\n    items {\n      id\n      name\n      createdAt\n      spools {\n        items { id spoolId }\n      }\n    }\n  }\n}",
+                "variables": "{\n  \"first\": 5\n}"
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        },
+        {
+          "name": "Introspection — list entity types",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "{ __schema { types { name kind } } }",
+                "variables": ""
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            },
+            "description": "Confirms the schema is reachable and lists every type DAB exposes. Useful as a first smoke test of GraphQL."
+          }
+        }
+      ]
+    }
+  ]
+}
