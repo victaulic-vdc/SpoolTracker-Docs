@@ -36,3 +36,9 @@ Read-only programmatic access to your organization's data via API keys.
 - [Overview](developer-api/README.md) — What the Developer API is, how to get a key, and what data is exposed
 - [Authentication](developer-api/authentication.md) — OAuth client_credentials flow with curl, Python, and Node.js examples
 - [Examples](developer-api/examples.md) — REST and GraphQL queries against projects, spools, scans, and bill of materials
+
+## MCP Server
+
+Connect an AI assistant (such as Claude) directly to your SpoolTracker data.
+
+- [Overview](mcp-server/README.md) — What the MCP server does, how to connect, how permissions work, and troubleshooting
