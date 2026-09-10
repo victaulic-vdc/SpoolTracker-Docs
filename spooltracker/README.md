@@ -9,6 +9,7 @@ SpoolTracker is a smartphone solution that enables Installation Engineers to dig
 Guides for the SpoolTracker mobile application on Android and iOS.
 
 - [PWA-Installation](mobile-app/pwa-install.md) - Instructions for installing Spooltracker's PWA on various devices
+- [App User Guide](mobile-app/pwa-userguide.md) — Day-to-day usage: logging in, scanning spools, working offline, and finding past scans
 - [Getting Started](mobile-app/getting-started.md) — Introduction, user roles, features, assumptions, and offline usage
 - [Login & Dashboard](mobile-app/login-and-dashboard.md) — Login flow, code suggestions, scan history, filtering, settings, and logout
 - [Scan Details](mobile-app/scan-details.md) — Viewing single and multiple scan records, adding manual scans
